@@ -10,6 +10,8 @@ from fnmatch import fnmatch
 from optparse import OptionParser
 from util import get_ssl_subject_CN
 
+from ping import do_one
+
 SHELVE_FILE = 'db.shelve'
 GOOGLE_DOMAINS_FILE = 'google_domains.txt'
 K_LATEST_MAPPING_RESULT = 'latest_mapping_result'
@@ -17,11 +19,16 @@ K_LATEST_PING_RESULT = 'latest_ping_result'
 
 
 def one_ping(ip):
-    ping_count = '1'
-    ping_timeout = '1'
-    res = subprocess.Popen(
-        ['ping', '-c', ping_count, '-n', '-W', ping_timeout, ip],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE).wait()
+    try:
+        delay = do_one(ip, 0.1)
+    except:
+        delay = None
+
+    if delay == None:
+        res = -1
+    else:
+        res = 0
+
     print 'ping %s : %s' % (ip, 'active' if res == 0 else 'inactive')
     return ip, res
 

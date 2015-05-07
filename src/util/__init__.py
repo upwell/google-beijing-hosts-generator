@@ -9,7 +9,7 @@ def get_ssl_subject_CN(ip_address, ssl_port=443):
     ctx.set_verify(SSL.verify_none, 1)
     conn = SSL.Connection(ctx)
     conn.postConnectionCheck = None
-    timeout = SSL.timeout(1)
+    timeout = SSL.timeout(0, 200000)
     conn.set_socket_read_timeout(timeout)
     conn.set_socket_write_timeout(timeout)
     try:
@@ -26,4 +26,4 @@ def get_ssl_subject_CN(ip_address, ssl_port=443):
     return c_CN
 
 if __name__ == '__main__':
-    assert get_ssl_subject_CN('203.208.36.1') == '*.google.com'
+    assert get_ssl_subject_CN('203.208.40.129') == '*.google.com'

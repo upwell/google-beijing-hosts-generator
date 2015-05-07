@@ -5,3 +5,4 @@ hosts
 active_google_ips.txt
 db.shelve
 postfix.patch
+.ropeproject
