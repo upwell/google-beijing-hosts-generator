@@ -1,9 +1,10 @@
-# coding: UTF-8
+#!/usr/bin/env python
+# encoding: utf-8
+
 #
 # 自动解析部分Google北京hosts
 # author: mckelvin
 
-import subprocess
 import multiprocessing as mp
 import shelve
 from fnmatch import fnmatch
@@ -24,7 +25,7 @@ def one_ping(ip):
     except:
         delay = None
 
-    if delay == None:
+    if delay is None:
         res = -1
     else:
         res = 0
